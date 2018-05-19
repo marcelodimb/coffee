@@ -1,0 +1,461 @@
+html * {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+*, *:before, *:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+html, body {
+	/* Atribui ao elemento principal a altura minima de 100% */
+	height: 100%;
+}
+a {
+	text-decoration: none;
+	outline: 0;
+}
+body {
+	background: #fff;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16pt;
+	font-weight: 300;
+	line-height: 1.75em;
+	color: #333;
+}
+
+/* Necesario apenas se desejar utilizar o scroll na navegacao apos o click no menu */
+/* Pra isso, e preciso descomentar as linhas que envolvam a classe overflow-hidden no main.js  */
+.overflow-hidden {
+	overflow: hidden;
+}
+.container {
+	width: 1220px;
+	margin: 0 auto;
+}
+.header {
+	width: 100%;
+	background-color: #4285f4;
+	border-bottom: 1px solid rgba(0,0,0,0.14);
+	padding-top: 5px;
+	padding-bottom: 5px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	/* Force Hardware Acceleration in WebKit */
+	-webkit-transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	transition-property: transform;
+	-webkit-transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+.header.lateral-menu-is-open {
+	/* Translate to show the lateral menu */
+	-webkit-transform: translateX(-260px);
+	-moz-transform: translateX(-260px);
+	-ms-transform: translateX(-260px);
+	-o-transform: translateX(-260px);
+	transform: translateX(-260px);
+}
+.header-is-scrolled {
+	box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	border-bottom: 0;
+}
+.header-logo {
+	line-height: 0;
+}
+.header-link {
+	display: inline-block;
+}
+.header-img {
+	width: 50px;
+	float: left;
+}
+.header-txt {
+	color: #fff;
+	font-size: 22pt;
+	float: left;
+	line-height: 50px;
+	padding-left: 10px;
+	font-weight: 400;
+}
+.menu-trigger {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	padding: 0 30px;
+}
+.menu-trigger .menu-icon {
+	/* This span is the central line in the menu menu */
+	display: inline-block;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	bottom: auto;
+	right: auto;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	-o-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	width: 18px;
+	height: 2px;
+	background-color: #fff;
+	/* These are the upper and lower lines in the menu menu */
+}
+.menu-trigger .menu-icon::before, .menu-trigger .menu-icon:after {
+	content: '';
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: inherit;
+	left: 0;
+}
+.menu-trigger .menu-icon::before {
+	bottom: 5px;
+}
+.menu-trigger .menu-icon::after {
+	top: 5px;
+}
+.menu-trigger.is-clicked .menu-icon {
+	background-color: rgba(255, 255, 255, 0);
+}
+.menu-trigger.is-clicked .menu-icon::before, .menu-trigger.is-clicked .menu-icon::after {
+	background-color: white;
+}
+.menu-trigger.is-clicked .menu-icon::before {
+	bottom: 0;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+.menu-trigger.is-clicked .menu-icon::after {
+	top: 0;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+.section {
+	padding-top: 91px;
+	background-color: #fff;
+	position: relative;
+	/* Set a min-height and a z-index to be sure that the main element completely covers the lateral menu */
+	min-height: 100%;
+	z-index: 2;
+	/* Force Hardware Acceleration in WebKit */
+	-webkit-transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	transition-property: transform;
+	-webkit-transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+.section.lateral-menu-is-open {
+	/* Translate to show the lateral menu - all content needs to be put in the .section to translate*/
+	-webkit-transform: translateX(-260px);
+	-moz-transform: translateX(-260px);
+	-ms-transform: translateX(-260px);
+	-o-transform: translateX(-260px);
+	transform: translateX(-260px);
+}
+.filters {
+	background: #f7f7f7;
+	padding: 20px;
+	box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),0 4px 5px 0 rgba(0,0,0,0.06),0 1px 10px 0 rgba(0,0,0,0.08);
+	border-top: 1px solid rgba(0,0,0,0.05);
+}
+.form-filters {
+	font-size: 12pt;
+	display: flex;
+}
+.form-filters-field {
+	float: left;
+	margin-left: 10px;
+	padding: 0;
+}
+.form-filters input[type=text],
+select {
+	width: 100%;
+	border: 1px solid #bebebe;
+	margin: 0;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+}
+.form-filters input[type=text] {
+	width: 100%;
+	padding: 7px;
+}
+.form-filters select {
+	min-width: 150px;
+	padding: 6px 7px;
+}
+.form-filters input[type=text]:focus,
+.form-filters select:focus {
+	-moz-box-shadow: 0 0 8px #88D5E9;
+	-webkit-box-shadow: 0 0 8px #88D5E9;
+	box-shadow: 0 0 8px #88D5E9;
+	border: 1px solid #88D5E9;
+}
+.form-filters input[type=submit],
+.form-filters input[type=submit]:hover {
+	-webkit-transition: background-color 300ms ease-out;
+	-moz-transition: background-color 300ms ease-out;
+	transition: background-color 300ms ease-out;
+}
+.form-filters input[type=submit] {
+	background: #2199e8;
+	padding: 8px 15px;
+	border: none;
+	color: #fff;
+	position: relative;
+	top: 24px;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 3px;
+	box-shadow: 0 -2px 0 rgba(0,0,0,0.2) inset;
+}
+.form-filters input[type=submit]:hover {
+	background: #1583cc;
+	cursor: pointer;
+}
+.keyword-field {
+	width: 100%;
+	margin-left: 0;
+}
+.form-filters label {
+	margin: 0;
+	padding: 0px;
+	display: block;
+	line-height: 1.5;
+}
+.content {
+	margin-top: 30px;
+}
+.content-title {
+	font-size: 32pt;
+	font-weight: 400;
+	margin-bottom: 20px;
+}
+.list-courses {
+	display: flex;
+	flex-direction: row;
+	-moz-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+.list-courses li {
+	width: calc(25% - 15px);
+	margin-left: 20px;
+	float: left;
+	padding: 20px;
+	border: 1px solid #eee;
+}
+.list-courses li:hover {
+	webkit-transition: all .15s ease-in-out;
+	-o-transition: all .15s ease-in-out;
+	transition: all .15s ease-in-out;
+	-webkit-box-shadow: 0 0 16px hsla(0,0%,80%,.6);
+	box-shadow: 0 0 16px hsla(0,0%,80%,.6);
+}
+.list-courses li:nth-child(4n+1) {
+	margin-left: 0;
+}
+.list-courses li:nth-child(n+5) {
+	margin-top: 20px;
+}
+.list-course-img {
+	max-width: 100%;
+	height: auto;
+}
+.list-courses li span {
+	font-size: 12pt;
+	line-height: 1;
+	margin-top: 5px;
+}
+.list-course-description {
+	margin-top: 10px;
+}
+.list-course-title {
+	font-weight: 600;
+	margin-top: 0;
+	display: block;
+	color: #333;
+}
+.list-course-discipline {
+	background: #666;
+	border-radius: 3px;
+	padding: 5px 8px;
+	font-weight: 400;
+	color: #fff;
+	display: inline-block;
+}
+.list-course-course {
+	display: block;
+	color: #333;
+}
+.lateral-nav {
+	position: fixed;
+	height: 100%;
+	right: 0;
+	top: 0;
+	visibility: hidden;
+	/* The secondary navigation is covered by the main element */
+	z-index: 1;
+	width: 260px;
+	background-color: #242e30;
+	padding: 15px 15px 0 15px;
+	overflow-y: auto;
+	/* Force Hardware Acceleration in WebKit */
+	-webkit-transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: -webkit-transform .4s 0s, visibility 0s .4s;
+	-moz-transition: -moz-transform .4s 0s, visibility 0s .4s;
+	transition: transform .4s 0s, visibility 0s .4s;
+	/* This creates the subtle slide in animation of the navigation */
+	-webkit-transform: translateX(80px);
+	-moz-transform: translateX(80px);
+	-ms-transform: translateX(80px);
+	-o-transform: translateX(80px);
+	transform: translateX(80px);
+}
+.lateral-nav.lateral-menu-is-open {
+	-webkit-transform: translateX(0);
+	-moz-transform: translateX(0);
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
+	transform: translateX(0);
+	visibility: visible;
+	-webkit-transition: -webkit-transform .4s 0s, visibility 0s 0s;
+	-moz-transition: -moz-transform .4s 0s, visibility 0s 0s;
+	transition: transform .4s 0s, visibility 0s 0s;
+	/* Smooth the scrolling on touch devices - webkit browsers */
+	-webkit-overflow-scrolling: touch;
+}
+.footer {
+	margin-top: 50px;
+}
+.footer-nav {
+	border-top: 1px solid #999;
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.footer-txt {
+	font-size: 12pt;
+}
+
+@media screen and (max-width: 1280px) {
+	.container {
+		width: 100%;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	.form-filters li {
+		width: 45%;
+		margin-left: 0;
+		margin-right: 10px;
+		float: none;
+	}
+	.form-filters li:first-child {
+		width: 100%;
+	}
+	.form-filters li:last-child {
+		width: 10%;
+		margin-right: 0;
+	}
+	.list-courses li {
+		width: calc(33.33% - 14px);
+	}
+	.list-courses li {
+		margin-left: 20px;
+	}
+	.list-courses li:nth-child(4n+1) {
+		margin-left: 20px;
+	}
+	.list-courses li:nth-child(3n+1) {
+		margin-left: 0;
+	}
+	.list-courses li:nth-child(n+4) {
+		margin-top: 20px;
+	}
+}
+@media screen and (max-width: 810px) {
+	.filters {
+		display: none;	
+	}
+	.form-filters {
+		display: grid;
+	}
+	.form-filters-field {
+		float: none;
+		display: table-cell;
+		margin-left: 0;
+		margin-top: 10px;
+	}
+	.keyword-field {
+		margin-top: 0;
+	}
+	.submit-field {
+		margin-top: 20px;
+	}
+	.form-filters label {
+		color: #fff;
+	}
+	.form-filters input[type=submit] {
+		top: 0;
+		width: 100%;
+		padding: 8px 0;
+	}
+	.content {
+		margin-top: 0;
+	}
+	.list-courses li {
+		width: calc(50% - 10px);
+	}
+	.list-courses li:nth-child(3n+1) {
+		margin-left: 20px;
+	}
+	.list-courses li:nth-child(2n+1) {
+		margin-left: 0;
+	}
+	.list-courses li:nth-child(n+3) {
+		margin-top: 20px;
+	}
+}
+@media screen and (min-width: 810px) {
+	.menu-trigger {
+		display: none;
+	}
+}
+@media screen and (max-width: 500px) {
+	.content-title {
+		font-size: 28pt;
+	}
+	.list-courses li {
+		width: 100%;
+		margin-left: 0;
+	}
+	.list-courses li:nth-child(4n+1) {
+		margin-left: 0;
+	}
+	.list-courses li:nth-child(n+2) {
+		margin-top: 20px;
+	}
+}
